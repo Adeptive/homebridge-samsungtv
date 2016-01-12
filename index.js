@@ -23,7 +23,7 @@ function SamsungTvAccessory(log, config) {
     this.name = config["name"];
     this.ip_address = config["ip_address"];
 
-    if (!this.room) throw new Error("You must provide a config value for 'room'.");
+    if (!this.ip_address) throw new Error("You must provide a config value for 'ip_address'.");
 
     this.remote = new SamsungRemote({
         ip: this.ip_address // required: IP address of your Samsung Smart TV
