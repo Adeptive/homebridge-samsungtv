@@ -1,0 +1,24 @@
+{
+  "name": "homebridge-samsungtv",
+  "version": "0.0.1",
+  "description": "Homebridge Samsung TV",
+  "author": "CONNCTED",
+  "dependencies": {
+    "samsung-remote": "^1.2.5"
+  },
+  "license": "ISC",
+  "keywords": [
+    "homebridge-plugin", "samsung"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/CONNCTED/homebridge-samsungtv.git"
+  },
+  "bugs": {
+    "url": "http://github.com/CONNCTED/homebridge-samsungtv/issues"
+  },
+  "engines": {
+    "node": ">=0.12.0",
+    "homebridge": ">=0.2.0"
+  }
+}
