@@ -62,23 +62,29 @@ SamsungTvAccessory.prototype.getServices = function() {
 };
 
 SamsungTvAccessory.prototype._getOn = function(callback) {
+    var accessory = this;
     this.remote.isAlive(function(err) {
         if (err) {
              callback(new Error('TV is offline'));
         } else {
-            console.log('TV is ALIVE!');
+            accessory.log.debug('TV is ALIVE!');
+            callback(null, true);
         }
-        callback(null, true);
     });
 };
 
 SamsungTvAccessory.prototype._setOn = function(on, callback) {
-    var accessory = this;
-
     if (on) {
-        callback(null);
+        callback(new Error('Could not turn on TV'));
     } else {
-        callback(null);
+        this.remote.send('KEY_POWER', function(err) {
+            if (err) {
+                callback(new Error(err));
+            } else {
+                // command has been successfully transmitted to your tv
+                callback(null);
+            }
+        });
     }
 };
 
