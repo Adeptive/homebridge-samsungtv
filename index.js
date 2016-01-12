@@ -62,9 +62,14 @@ SamsungTvAccessory.prototype.getServices = function() {
 };
 
 SamsungTvAccessory.prototype._getOn = function(callback) {
-    var accessory = this;
-
-    callback(null, true);
+    this.remote.isAlive(function(err) {
+        if (err) {
+             callback(new Error('TV is offline'));
+        } else {
+            console.log('TV is ALIVE!');
+        }
+        callback(null, true);
+    });
 };
 
 SamsungTvAccessory.prototype._setOn = function(on, callback) {
