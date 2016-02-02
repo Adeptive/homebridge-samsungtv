@@ -62,16 +62,14 @@ SamsungTvAccessory.prototype._getOn = function (callback) {
 };
 
 SamsungTvAccessory.prototype._setOn = function (on, callback) {
+    var accessory = this;
+    
     if (on) {
         callback(null, false);
     } else {
-        this.remote.send('KEY_POWEROFF', function (err) {
-            if (err) {
-                callback(new Error(err));
-            } else {
-                // command has been successfully transmitted to your tv
-                callback(null);
-            }
-        });
+        this.remote.send('KEY_POWEROFF', function (result) {
+            accessory.log(result);
+        }.bind(accessory));
+        callback(null,false);
     }
 };
