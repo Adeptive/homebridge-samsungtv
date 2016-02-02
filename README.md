@@ -1,6 +1,8 @@
-#Homebridge-samsungtv
+#Homebridge-samsung_tv
 
 Samsung TV plugin for [Homebridge](https://github.com/nfarina/homebridge)
+
+Branched from https://github.com/CONNCTED/homebridge-samsungtv
 
 This allows you to control your Samsung TV with HomeKit and Siri.
 

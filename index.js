@@ -6,12 +6,8 @@ module.exports = function (homebridge) {
     Service = homebridge.hap.Service;
     Characteristic = homebridge.hap.Characteristic;
 
-    homebridge.registerAccessory("homebridge-samsungtv", "SamsungTV", SamsungTvAccessory);
+    homebridge.registerAccessory("homebridge-samsung_tv", "SamsungTV", SamsungTvAccessory);
 };
-
-//
-// SoundTouch Accessory
-//
 
 function SamsungTvAccessory(log, config) {
     this.log = log;
