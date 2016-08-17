@@ -65,7 +65,8 @@ SamsungTvAccessory.prototype._getOn = function(callback) {
     var accessory = this;
     this.remote.isAlive(function(err) {
         if (err) {
-             callback(new Error('TV is offline'));
+            accessory.log.debug('TV is offline');
+            callback(null, false);
         } else {
             accessory.log.debug('TV is ALIVE!');
             callback(null, true);
@@ -75,9 +76,17 @@ SamsungTvAccessory.prototype._getOn = function(callback) {
 
 SamsungTvAccessory.prototype._setOn = function(on, callback) {
     if (on) {
-        callback(new Error('Could not turn on TV'));
+        this.remote.send('KEY_POWERON', function(err) {
+            if (err) {
+                callback(new Error('Could not turn on TV'));
+            } else {
+		// command has been successfully transmitted to your tv,
+                // so it should be on now.
+                callback(null);
+            }
+        });
     } else {
-        this.remote.send('KEY_POWER', function(err) {
+        this.remote.send('KEY_POWEROFF', function(err) {
             if (err) {
                 callback(new Error(err));
             } else {
