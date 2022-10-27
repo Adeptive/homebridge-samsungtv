@@ -12,20 +12,11 @@ This allows you to control your Samsung TV with HomeKit and Siri.
 3. Update your configuration file. See the sample below.
 
 ##Configuration
-Example config.json:
-
-```
-    "accessories": [
-		{
-			"accessory": "SamsungTV",
-			"name": "TV Living room",
-			"ip_address": "192.168.1.2"
-		}
-	],
-```
+You can use the Configuration UI from Homebridge
 
 Fields: 
 
-* "accessory": Must always be "SamsungTV" (required)
 * "name": The name you want to use to control the TV.
 * "ip_address": The internal ip address of your samsung TV
+* "intervall": in seconds the interval of checking the alive state
+* "disableLogging": activate or deactivate the logging of the plugin
