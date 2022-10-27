@@ -1,0 +1,36 @@
+{
+    "pluginAlias": "SamsungTV",
+    "pluginType": "accessory",
+    "singular": true,
+    "schema": {
+        "type": "object",
+        "properties": {
+            "name": {
+                "title": "TV Name",
+                "type": "string",
+                "required": true,
+                "default": "Samsung TV"
+            },
+            "ip_address": {
+                "title": "IP Adress",
+                "type": "string",
+                "required": true,
+                "default": "192.168.x.x",
+                "format": "ipv4"
+            },
+            "intervall": {
+                "title": "Update Intervall",
+                "type": "number",
+                "required": false,
+                "default": "20",
+                "description": "In seconds"
+            },
+            "disableLogging": {
+                "title": "Disable Logging",
+                "type": "boolean",
+                "required": false,
+                "default": "true"
+            }
+        }
+    }
+}
