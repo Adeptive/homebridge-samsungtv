@@ -11,9 +11,10 @@ module.exports = function (homebridge) {
 
 function SamsungTvAccessory(log, config) {
     this.log = log;
-    this.config = config;
-    this.name = config["name"];
-    this.ip_address = config["ip_address"];
+    this.name = config.name;
+    this.ip_address = config.ip_address;
+    this.intervall = config.intervall;
+    this.disableLogging = config.disableLogging;
 
     if (!this.ip_address) throw new Error("You must provide a config value for 'ip_address'.");
 
@@ -27,6 +28,26 @@ function SamsungTvAccessory(log, config) {
         .getCharacteristic(Characteristic.On)
         .on('get', this._getOn.bind(this))
         .on('set', this._setOn.bind(this));
+
+    this.updateInterval = setInterval(() => {
+
+            this.remote.isAlive((err) => {
+                if (err) {
+                    this.service.updateCharacteristic(Characteristic.On, false);
+                    if( ! this.disableLogging ) {
+                        this.log(this.name + ' is offline');
+                    }
+    
+                } else {
+                    this.service.updateCharacteristic(Characteristic.On, true);
+                    if( ! this.disableLogging ) {
+                        this.log(this.name + ' is ALIVE!');
+                    }
+                }
+            });
+
+
+        }, this.intervall * 1000);
 
 }
 
@@ -48,10 +69,8 @@ SamsungTvAccessory.prototype._getOn = function (callback) {
     var accessory = this;
     this.remote.isAlive(function (err) {
         if (err) {
-            accessory.log('TV is offline');
             callback(null, false)
         } else {
-            accessory.log('TV is On');
             callback(null, true);
         }
     });
@@ -64,7 +83,9 @@ SamsungTvAccessory.prototype._setOn = function (on, callback) {
         callback(null, false);
     } else {
         this.remote.send('KEY_POWEROFF', function (result) {
-            accessory.log(result);
+            if( ! this.disableLogging ) {
+                accessory.log(result);
+            }
         }.bind(accessory));
         callback(null,false);
     }
