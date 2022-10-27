@@ -1,29 +1,22 @@
-#Homebridge-samsungtv
+# Homebridge-samsung_tv
 
 Samsung TV plugin for [Homebridge](https://github.com/nfarina/homebridge)
 
+Branched from https://github.com/CONNCTED/homebridge-samsungtv
+
 This allows you to control your Samsung TV with HomeKit and Siri.
 
-##Installation
+## Installation
 1. Install homebridge using: npm install -g homebridge
-2. Install this plugin using: npm install -g homebridge-samsungtv
+2. Install this plugin using: npm install -g homebridge-samsung_tv
 3. Update your configuration file. See the sample below.
 
-##Configuration
-Example config.json:
-
-```
-    "accessories": [
-		{
-			"accessory": "SamsungTV",
-			"name": "TV Living room",
-			"ip_address": "192.168.1.2"
-		}
-	],
-```
+## Configuration
+You can use the Configuration UI from Homebridge
 
 Fields: 
 
-* "accessory": Must always be "SamsungTV" (required)
 * "name": The name you want to use to control the TV.
 * "ip_address": The internal ip address of your samsung TV
+* "intervall": in seconds the interval of checking the alive state
+* "disableLogging": activate or deactivate the logging of the plugin
